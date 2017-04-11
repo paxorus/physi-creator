@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Physi Editor</title>
+		<link href="https://fonts.googleapis.com/css?family=Julius+Sans+One" rel="stylesheet">
+		<style>
+		body {
+			background-image: url('https://c1.staticflickr.com/8/7065/6812184802_ecc30236f2_b.jpg');
+			background-size: cover;
+			margin: 0;
+			overflow: hidden;
+			font-family: 'Julius Sans One', sans-serif;
+			color: white;
+		}
+		#palette {
+			background-color: #444;
+			display: inline-block;
+			padding: 15px;
+			position: fixed;
+			/*height: 100%;*/
+		}
+		#toggle-palette {
+			cursor: pointer;
+			width: 50px;
+			float: right;
+			right: 15px;
+		}
+		.jscolor {
+			border: 0;
+			width: 55px;
+			cursor: pointer;
+			text-align: center;
+		}
+		input[type=number] {
+			border: 0;
+			width: 40px;
+			cursor: pointer;
+			background-color: #222;
+			color: white;
+			text-align: center;
+		}
+		#modify-alpha {
+			width: 60px;
+		}
+		</style>
+	</head>
+	<body>
+		<div id="palette">
+			<img src="images/show-menu-icon.png" id="toggle-palette">
+			<br>Wireframe: <input type="checkbox" id="modify-wireframe">
+			<br>Color: <input class="jscolor" id="modify-color">&alpha;: <input type="number" min="0" max="1" step="0.05" id="modify-alpha" value="0.5">
+			
+			<br>Size: <span id="modify-size">
+				X: <input type="number">
+				Y: <input type="number">
+				Z: <input type="number">
+			</span>
+			<br>Position: <span id="modify-position">
+				X: <input type="number">
+				Y: <input type="number">
+				Z: <input type="number">
+			</span>
+			<br>Rotation: <span id="modify-rotation">
+				X: <input type="number">
+				Y: <input type="number">
+				Z: <input type="number">
+			</span>
+			<br>Mass: <input type="number" min="0" id="modify-mass">
+		</div>
+
+
+		<script src="javascripts/lib/jscolor.js"></script>
+		<script src="javascripts/lib/three.js"></script>
+		<script src="javascripts/lib/physi.js"></script>
+		<script src="javascripts/lib/FirstPersonControls.js"></script>
+		<script src="javascripts/lib/jquery.js"></script>
+
+		<script src="javascripts/palette.js"></script>
+		<script src="javascripts/environment.js"></script>
+		<script src="javascripts/graphics.js"></script> -->
+	</body>
+</html>
