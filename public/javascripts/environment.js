@@ -1,5 +1,5 @@
 /**
- * Abstracts Three/Physi.
+ * Abstracts the Three/Physi setup.
  * 
  * @author Prakhar Sahay 03/21/2017
  */
@@ -26,9 +26,12 @@ function Environment() {
 	document.body.appendChild(renderer.domElement);
 
 	var listeners = [];
+	var meshes = [];
 
 	this.add = function (mesh) {
+		meshes.push(mesh);
 		scene.add(mesh);
+		this.render();
 	};
 
 	// pedal the Three engine
@@ -43,6 +46,10 @@ function Environment() {
 
 	this.update = function () {
 		controls.update(1/60);
+	};
+
+	this.resume = function () {
+		scene.onSimulationResume();
 	}
 
 	// create a glass-like floor
@@ -54,30 +61,6 @@ function Environment() {
 		);
 		floor.rotation.x = - Math.PI / 2;
 		scene.add(floor);
-	};
-
-	this.addBox = function (size, position) {
-		var box = new Physi.BoxMesh(
-			// width, height, depth
-			new THREE.CubeGeometry(size[0], size[1], size[2]),
-			new THREE.MeshBasicMaterial({color: 0x444444, transparent: true, opacity: 0.9}),
-			10000
-		);
-		// left, height, forward
-		box.position.set(position[0], position[1], position[2]);
-		this.add(box);
-		return box;
-	};
-
-	this.addSphere = function (radius, position, color) {
-		color = color || 0x444444;
-		var sphere = new Physi.SphereMesh(
-			new THREE.SphereGeometry(radius, 10, 10),
-			new THREE.MeshBasicMaterial({color: color, transparent: true, opacity: 0.9})
-		);
-		sphere.position.set(position[0], position[1], position[2]);
-		env.add(sphere);
-		return sphere;
 	};
 
 	// start an event listener
@@ -138,9 +121,10 @@ function Environment() {
 	};
 
 	this.objects = function () {
-		return scene.children.filter(function (x) {
-			return x instanceof THREE.Mesh;
-		});
+		// return scene.children.filter(function (x) {
+		// 	return x instanceof THREE.Mesh;
+		// });
+		return meshes;
 	};
 
 	this.floor();

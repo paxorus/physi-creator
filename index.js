@@ -1,5 +1,5 @@
 /**
- *
+ * Barebone Node.js server.
  *
  * @author Prakhar Sahay 03/21/2017
  */

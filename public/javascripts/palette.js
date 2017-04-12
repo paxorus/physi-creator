@@ -6,6 +6,14 @@
 
 var Palette = {
 	currentMesh: null,
+
+	update: function () {
+		if (this.currentMesh !== null) {
+			this.populate(this.currentMesh);
+			console.log("update");
+		}
+	},
+
 	populate: function (mesh) {
 		this.currentMesh = mesh;
 		$("#modify-wireframe").prop("checked", mesh.material.wireframe);
@@ -17,7 +25,9 @@ var Palette = {
 		this._xyzToNode($("#modify-position").children(), mesh.position);
 		// rotation
 		this._xyzToNode($("#modify-rotation").children(), mesh.rotation);
-		$("#modify-mass").val(mesh.mass);
+		if ($("#modify-mass").get(0) != document.activeElement) {
+			$("#modify-mass").val(mesh.mass);
+		}
 
 	},
 
@@ -36,15 +46,21 @@ var Palette = {
 	},
 
 	_nodeToXyz: function (nodes, vector) {
-		vector.x = parseInt(nodes[0].value, 10);
-		vector.y = parseInt(nodes[1].value, 10);
-		vector.z = parseInt(nodes[2].value, 10);
+		vector.x = parseInt(nodes[1].value, 10);
+		vector.y = parseInt(nodes[3].value, 10);
+		vector.z = parseInt(nodes[5].value, 10);
 	},
 
 	_xyzToNode: function (nodes, vector) {
-		nodes[0].value = vector.x;
-		nodes[1].value = vector.y;
-		nodes[2].value = vector.z;
+		if (nodes[1] != document.activeElement) {
+			nodes[1].value = vector.x;		
+		}
+		if (nodes[3] != document.activeElement) {
+			nodes[3].value = vector.y;		
+		}
+		if (nodes[5] != document.activeElement) {
+			nodes[5].value = vector.z;		
+		}
 	}
 };
 
@@ -73,7 +89,7 @@ $("#modify-position").children().change(function (event) {
 	Palette.currentMesh.__dirtyPosition = true;
 });
 
-$("#modify-position").children().change(function (event) {
+$("#modify-rotation").children().change(function (event) {
 	Palette._nodeToXyz($("#modify-rotation").children(), Palette.currentMesh.rotation);
 	Palette.currentMesh.__dirtyRotation = true;
 });
